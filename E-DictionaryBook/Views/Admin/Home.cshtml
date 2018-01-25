@@ -1,0 +1,25 @@
+﻿
+<script src="~/Scripts/angular.js"></script>
+@{
+    ViewBag.Title = "Home";
+    
+}
+
+<script>
+    var app = angular.module('myTestApp', []);
+    app.controller('myTestController', myFunction);
+    
+    
+
+    function myFunction($scope)
+    {
+        $scope.firstName = "John";
+        $scope.lastName = "Doe";
+    }
+
+</script>
+<div ng-app="myTestApp" ng-controller="myTestController">
+    FirstName:{{firstName}}
+</div>
+<h2>Home</h2>
+

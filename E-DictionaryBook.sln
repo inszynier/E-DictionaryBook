@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E-DictionaryBook", "E-DictionaryBook\E-DictionaryBook.csproj", "{481DF2BA-BAEA-4EBD-B0FB-77F3B6456F18}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E-DictionaryBook-Web", "E-DictionaryBook\E-DictionaryBook-Web.csproj", "{481DF2BA-BAEA-4EBD-B0FB-77F3B6456F18}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
