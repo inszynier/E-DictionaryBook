@@ -6,9 +6,11 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Content/Scripts/myTestApp.js"></script>
 </head>
-<body>
+<body ng-app="myTestApp">
+    {{5-6}}
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -21,9 +23,9 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Admin", "Home", "Admin")</li>
+                    <li>@Html.ActionLink("Student", "Home", "Student")</li>
+                    <li>@Html.ActionLink("Teacher", "Home", "Teacher")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

@@ -5,21 +5,12 @@
     
 }
 
-<script>
-    var app = angular.module('myTestApp', []);
-    app.controller('myTestController', myFunction);
-    
-    
-
-    function myFunction($scope)
-    {
-        $scope.firstName = "John";
-        $scope.lastName = "Doe";
-    }
-
-</script>
-<div ng-app="myTestApp" ng-controller="myTestController">
+<div  ng-controller="myTestController">
     FirstName:{{firstName}}
+
+   
+    -> <div ng-include="'/Content/Views/Homed.html'"></div>
+
 </div>
 <h2>Home</h2>
 
