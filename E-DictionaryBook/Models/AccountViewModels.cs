@@ -79,6 +79,21 @@ namespace E_DictionaryBook.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        //[Required] //Role is required only when the User is created and the role is specified and acciosiated with him. When user want to log in the role is automaticlly detected. (example readed from base)
+        [Display(Name = "Role")]
+        public Role Role { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 1)]
+        [Display(Name = "FirstName")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 1)]
+        [Display(Name = "LastName")]
+        public string LastName { get; set; }
+
     }
 
     public class ResetPasswordViewModel

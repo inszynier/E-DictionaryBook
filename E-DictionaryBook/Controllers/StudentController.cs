@@ -6,8 +6,10 @@ using System.Web.Mvc;
 
 namespace E_DictionaryBook.Controllers
 {
+    
     public class StudentController : Controller
     {
+        [Authorize(Roles = "Admin, Student, Teacher")]
         // GET: Student
         public ActionResult Home()
         {

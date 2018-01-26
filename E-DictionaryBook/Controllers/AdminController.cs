@@ -8,7 +8,7 @@ namespace E_DictionaryBook.Controllers
 {
     public class AdminController : Controller
     {
-                
+        //[Authorize(Roles = "Admin")]
         // GET: Admin
         public ActionResult Home()
         {

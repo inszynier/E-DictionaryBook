@@ -12,6 +12,46 @@
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
+        @Html.LabelFor(m => m.FirstName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.LastName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Role, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+
+            @{ 
+                List<SelectListItem> listOfRoles = new List<SelectListItem>();
+
+                SelectListItem adminRole = new SelectListItem() { Text = "Admin", Value = "Admin" };
+                SelectListItem teacherRole = new SelectListItem() { Text = "Teacher", Value = "Teacher" };
+                SelectListItem studentRole = new SelectListItem() { Text = "Student", Value = "Student" };
+
+                listOfRoles.Add(adminRole);
+                listOfRoles.Add(teacherRole);
+                listOfRoles.Add(studentRole);
+            }
+
+            @Html.DropDownListFor(m => m.Role.RoleName, listOfRoles);
+            @*@Html.DropDownListFor(m => m.Role.Id, new SelectList(Model.Role.FirstOrDefault().RolesInRole, "Id", "RoleName"))*@
+            @*<select id="selectRoleId" name="selectRoleName">
+                <option value="Admin">Admin</option>
+                <option value="Teacher">Teacher</option>
+                <option value="Student">Student</option>
+            </select>
+            <div ng-repeat="item in @Model">
+                {{item}}
+            </div>*@
+        </div>
+    </div>
+    <div class="form-group">
         @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
