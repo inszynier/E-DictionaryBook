@@ -26,6 +26,13 @@
                     <li>@Html.ActionLink("Admin", "Home", "Admin")</li>
                     <li>@Html.ActionLink("Student", "Home", "Student")</li>
                     <li>@Html.ActionLink("Teacher", "Home", "Teacher")</li>
+                    <li>@Html.ActionLink("Contact", "Home", "Contact")</li>
+                    <li>
+                        <select>
+                            <option value="PL">PL</option>
+                            <option value="ENG" selected>ENG</option>
+                        </select>
+                    </li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -35,7 +42,8 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - E-DictionaryBook</p>
+            Created by Inszynier :)
         </footer>
     </div>
 

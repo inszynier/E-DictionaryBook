@@ -200,6 +200,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
@@ -1052,6 +1053,7 @@
     <Content Include="Views\Admin\Home.cshtml" />
     <Content Include="Views\Student\Home.cshtml" />
     <Content Include="Views\Teacher\Home.cshtml" />
+    <Content Include="Views\Contact\Home.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

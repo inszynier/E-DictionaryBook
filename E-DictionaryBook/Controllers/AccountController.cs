@@ -9,12 +9,14 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using E_DictionaryBook.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace E_DictionaryBook.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
+        
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -26,10 +28,12 @@ namespace E_DictionaryBook.Controllers
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            
         }
 
         public ApplicationSignInManager SignInManager
         {
+            
             get
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
@@ -51,7 +55,7 @@ namespace E_DictionaryBook.Controllers
                 _userManager = value;
             }
         }
-
+        
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -153,6 +157,29 @@ namespace E_DictionaryBook.Controllers
             {
                 var user = new ApplicationUser { UserName = model.FirstName + " " + model.LastName, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, Role = model.Role.RoleName/*Role = model.Role*/ };
                 var result = await UserManager.CreateAsync(user, model.Password);
+
+
+                ApplicationDbContext db = new ApplicationDbContext();
+                //db.
+                var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
+                //var roleManager = RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
+                
+
+                      // In Startup iam creating first Admin Role and creating a default Admin User   
+                if (!roleManager.RoleExists(model.Role.RoleName))
+                {
+
+                    // first we create Admin rool  
+                    var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                    role.Name = model.Role.RoleName;
+                    roleManager.Create(role);
+                }
+
+
+                    //RoleManager
+                    //var RoleAsignedWithUser = new RoleManager<ApplicationIdentity>()
+                    UserManager.AddToRole(user.Id, model.Role.RoleName);
+
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
