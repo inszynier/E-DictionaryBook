@@ -6,11 +6,8 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <script src="~/Scripts/angular.js"></script>
-    <script src="~/Content/Scripts/myTestApp.js"></script>
 </head>
-<body ng-app="myTestApp">
-    {{5-6}}
+<body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -19,33 +16,23 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <img src="~/Content\Images\E-Dziennik.jpg" class="img-center" height="50" width="50" alt="MyProgramLogo" />
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="/Admin/Profile/Account">Admin</a></li>
-                    <li><a href="/Student/Profile/Account">Student</a></li>
-                    <li><a href="/Teacher/Profile/Account">Teacher</a></li>
-                    <li>
-                        <select>
-                            <option value="PL">PL</option>
-                            <option value="ENG" selected>ENG</option>
-                        </select>
-                    </li>
                 </ul>
-                @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
+
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - E-DictionaryBook</p>
-            Created by Inszynier :)
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>
-    
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

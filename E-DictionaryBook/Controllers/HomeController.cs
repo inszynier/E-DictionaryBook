@@ -6,11 +6,10 @@ using System.Web.Mvc;
 
 namespace E_DictionaryBook.Controllers
 {
-    public class AdminController : Controller
+    public class HomeController : Controller
     {
-        //[Authorize(Roles = "Admin")]
-        // GET: Admin
-        public ActionResult Home()
+        // GET: Home
+        public ActionResult Index()
         {
             return View();
         }

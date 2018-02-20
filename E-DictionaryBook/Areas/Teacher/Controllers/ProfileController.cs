@@ -4,13 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace E_DictionaryBook.Controllers
+namespace E_DictionaryBook.Areas.Teacher.Controllers
 {
-    public class TeacherController : Controller
+    public class ProfileController : Controller
     {
         [Authorize(Roles = "Admin, Teacher")]
-        // GET: Teacher
-        public ActionResult Home()
+        // GET: Teacher/Profile
+        public ActionResult Account()
         {
             return View();
         }
