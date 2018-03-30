@@ -26,6 +26,14 @@ namespace E_DictionaryBook
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+            
+            bundles.Add(new ScriptBundle("~/bundles/angular").Include(
+                "~/Scripts/angular.js",
+                "~/Content/Scripts/myTestApp.js",
+                "~/Content/Scripts/myTestApp.js",
+                "~/Scripts/AngularJSAplicationMainModule/Modules/eDictionaryBookMainModule.js",
+                "~/Scripts/AngularJSAplicationMainModule/Controllers/MainController.js",
+                "~/Scripts/AngularJSAplicationMainModule/Services/ResourceLanguage.js"));
         }
     }
 }

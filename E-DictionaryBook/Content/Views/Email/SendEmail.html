@@ -1,0 +1,29 @@
+﻿<form action="/Email/Send/SendEmail" method="post">
+    <!--This is loading data spinenr. When we loading some data the spinner is visible and other part of page is not visible-->
+    <div class="fa fa-circle-o-notch fa-spin" style="font-size: 500px;color: red;position: absolute;left: 100px;top: 150px;" ng-hide="vmEmailCtrl.load"></div>
+    <!-- This is person where we send mail - To -->
+    <div class="form-group">
+        <label for="To">To</label>
+        <input ng-model="vmEmailCtrl.To" name="To" class="form-control" id="To" placeholder="Write address email where you want to send email" />
+    </div>
+    <!-- This is persons where we send mail - CClist -->
+    <div class="form-group">
+        <label for="CC">Email address (to who u send mail?)</label>
+        <div ng-repeat="item in vmEmailCtrl.ccList">
+            <input ng-model="item.Email" class="form-control" id="CC" placeholder="Enter CC email" />
+        </div>
+        <input value="addCC" type="button" class="btn btn-primary" id="addCC" name="addCC" ng-click="vmEmailCtrl.addCC()" />
+    </div>
+    <!-- This is subject of mail - subject -->
+    <div class="form-group">
+        <label for="Subject">Subject</label>
+        <input ng-model="vmEmailCtrl.Subject" name="Subject" class="form-control" id="Subject" placeholder="Enter Subject email" />
+    </div>
+    <!-- This is body of mail - Body -->
+    <div class="form-group">
+        <label for="Body">Body of mail</label>
+        <textarea ng-model="vmEmailCtrl.Body" name="Body" class="form-control" rows="5" id="Body" placeholder="Write here your message"></textarea>
+    </div>
+
+    <button type="button" ng-click="vmEmailCtrl.sendData()" class="btn btn-primary">Send email</button>
+</form>

@@ -1,0 +1,9 @@
+﻿@{
+    ViewBag.Title = "ReceiveEmail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/AngularJSAplicationMainModule/Controllers/EmailController.js"></script>
+<div ng-controller="EmailController as vmEmailCtrl" ng-init="vmEmailCtrl.receiveEmails = @Newtonsoft.Json.JsonConvert.SerializeObject(Model)">
+    <div ng-include="'/Content/Views/Email/ReceiveEmail.html'"></div>
+</div>
+<h2>ReceiveEmail</h2>

@@ -6,79 +6,89 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <script src="~/Scripts/angular.js"></script>
-    <script src="~/Content/Scripts/myTestApp.js"></script>
+    @Scripts.Render("~/bundles/angular")  @* Scripts which i use in this application *@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body ng-app="myTestApp">
+  
+<body ng-app="eDictionaryBookMainModule">
     {{5-6}}
-        <div class="container">
-            @*<div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <img src="~/Content/Images/E-Dziennik.jpg" class="img-center" height="50" width="50" alt="MyProgramLogo" />
-            </div>*@
-            <nav class="navbar navbar-inverse">
-                <div class="container-fluid">
-                    <div class="navbar-header">
+    <div ng-controller="MainController as vmMainCtlr">
+           @* This is loading data spinenr. When we loading some data the spinner is visible and other part of page is not visible *@ 
+            <div class="fa fa-circle-o-notch fa-spin" style="font-size: 500px;color: red;position: absolute;left: 100px;top: 150px;" ng-hide="vmMainCtlr.load"></div>
+
+            <div class="container" ng-show="vmMainCtlr.load">
+                <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+                    <!-- This is image - logo on main navbar -->
+                    <a class="navbar-brand" href="/">
                         <img src="~/Content/Images/E-Dziennik.jpg" class="img-center" height="50" width="50" alt="MyProgramLogo" />
-                    </div>
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="#">E-DictionaryBook</a>
-                    </div>
-                    <ul class="nav navbar-nav">
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                Language
-                                <span class="caret"></span>
+                    </a>
+                    <a class="navbar-brand" href="/">E-DictionaryBook</a>
+                    <!-- This is navbar options -->
+                    <ul class="navbar-nav">
+                        <!-- Dropdown with change language -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                                {{vmMainCtlr.resource.language}}
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" ng-click="vmMainCtlr.changeLanguage(0)">{{vmMainCtlr.resource.languagePL}}</a>
+                                <a class="dropdown-item" ng-click="vmMainCtlr.changeLanguage(1)">{{vmMainCtlr.resource.languageENG}}</a>
+                            </div>
+                        </li>
+                        <!-- Dropdown - account options -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                                {{vmMainCtlr.resource.account}}
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">{{vmMainCtlr.resource.gradebook}}</a>
+                                <a class="dropdown-item" href="#">{{vmMainCtlr.resource.accountSettings}}</a>
+                                <a class="dropdown-item" href="#">{{vmMainCtlr.resource.personalData}}</a>
+                                <a class="dropdown-item" href="#">{{vmMainCtlr.resource.finances}}</a>
+                                <a class="dropdown-item" href="#">{{vmMainCtlr.resource.dormitory}}</a>
+                            </div>
+                        </li>
+                        <!-- Dropdown - schedule -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" id="navbardrop">
+                                {{vmMainCtlr.resource.schedule}}
+                            </a>
+                        </li>
+                        <!-- Dropdown - emails options -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbardrop" href="#">
+                                {{vmMainCtlr.resource.emailsMessages}}
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">English</a></li>
-                                <li><a href="#">Polish</a></li>
+                                <li><a href="/Email/Send/SendEmail">{{vmMainCtlr.resource.sendEmail}}</a></li>
+                                <li><a href="/Email/Receive/ReceiveEmail">{{vmMainCtlr.resource.receiveEmails}}</a></li>
                             </ul>
                         </li>
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                Account
+                        <!-- Dropdown - other -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbardrop" href="#">
+                                {{vmMainCtlr.resource.other}}
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Gradebook</a></li>
-                                <li><a href="#">Account settings</a></li>
-                                <li><a href="#">Personal data</a></li>
-                                <li><a href="#">Finances</a></li>
-                                <li><a href="#">Dormitory</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Schedule</a></li>
-                        <li><a href="#">Mails</a></li>
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                Other
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Announcement</a></li>
-                                <li><a href="#">Notes</a></li>
-                                <li><a href="#">Tasks</a></li>
+                                <li><a href="#">{{vmMainCtlr.resource.announcement}}</a></li>
+                                <li><a href="#">{{vmMainCtlr.resource.notes}}</a></li>
+                                <li><a href="#">{{vmMainCtlr.resource.tasks}}</a></li>
                             </ul>
                         </li>
                     </ul>
-                </div>
-                @Html.Partial("_LoginPartial")
-            </nav>
+                    @Html.Partial("_LoginPartial")
+                </nav>
+            </div>
+            <div class="container body-content">
+                @RenderBody()
+                <hr />
+                <footer>
+                    <p>&copy; @DateTime.Now.Year - E-DictionaryBook</p>
+                    {{vmMainCtlr.resource.createdBy}} Inszynier :)
+                </footer>
+            </div>
         </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - E-DictionaryBook</p>
-            Created by Inszynier :)
-        </footer>
-    </div>
-    
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

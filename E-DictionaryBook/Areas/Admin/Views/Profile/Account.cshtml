@@ -1,16 +1,12 @@
-﻿
-<script src="~/Scripts/angular.js"></script>
+﻿<script src="~/Scripts/angular.js"></script>
 @{
     ViewBag.Title = "Home";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <div ng-controller="myTestController">
     FirstName:{{firstName}}
 
-
     -> <div ng-include="'/Content/Views/Homed.html'"></div>
-
 </div>
 <h2>Home</h2>
 

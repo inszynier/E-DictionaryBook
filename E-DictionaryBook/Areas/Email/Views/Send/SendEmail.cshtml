@@ -1,0 +1,11 @@
+﻿@model E_DictionaryBook.Areas.Email.Models.EmailVM
+@{
+    ViewBag.Title = "SendEmail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/AngularJSAplicationMainModule/Controllers/EmailController.js"></script>
+<div ng-controller="EmailController as vmEmailCtrl" ng-init="vmEmailCtrl.test = @Newtonsoft.Json.JsonConvert.SerializeObject(Model)">
+    <div ng-include="'/Content/Views/Email/SendEmail.html'"></div>
+</div>
+@Html.LabelFor(m => m)
+<h2>SendEmail</h2>

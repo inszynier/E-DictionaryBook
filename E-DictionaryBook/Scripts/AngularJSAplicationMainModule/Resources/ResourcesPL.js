@@ -1,0 +1,4 @@
+﻿var resource =
+{
+    test: 'testePL',
+}

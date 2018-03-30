@@ -16,7 +16,6 @@ namespace E_DictionaryBook.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -76,7 +75,12 @@ namespace E_DictionaryBook.Controllers
             {
                 return View(model);
             }
-
+            //When we login we create a cookie with password - because we need not hashed password to 
+            //login to email server
+            HttpCookie PasswordCookie = new HttpCookie("PasswordCookie");
+            PasswordCookie.Value = model.Password;
+            PasswordCookie.Expires = DateTime.Now.AddDays(1);
+            Response.Cookies.Add(PasswordCookie);
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
 
@@ -163,32 +167,23 @@ namespace E_DictionaryBook.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.FirstName + " " + model.LastName, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, Role = model.Role.RoleName/*Role = model.Role*/ };
-                var result = await UserManager.CreateAsync(user, model.Password);
-
-
-                ApplicationDbContext db = new ApplicationDbContext();
-                //db.
-                var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
-                //var roleManager = RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
+                var result = await UserManager.CreateAsync(user, model.Password);//await UserManager.CreateAsync(user, model.Password);
                 
-
-                      // In Startup iam creating first Admin Role and creating a default Admin User   
+                ApplicationDbContext db = new ApplicationDbContext();
+                var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
+                
+                // In Startup iam creating first Admin Role and creating a default Admin User   
                 if (!roleManager.RoleExists(model.Role.RoleName))
                 {
-
                     // first we create Admin rool  
                     var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
                     role.Name = model.Role.RoleName;
                     roleManager.Create(role);
                 }
-
-
-                    //RoleManager
-                    //var RoleAsignedWithUser = new RoleManager<ApplicationIdentity>()
-                    UserManager.AddToRole(user.Id, model.Role.RoleName);
-
+                
                 if (result.Succeeded)
                 {
+                    UserManager.AddToRole(user.Id, model.Role.RoleName);
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
@@ -426,6 +421,12 @@ namespace E_DictionaryBook.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
+
+            if (Request.Cookies["PasswordCookie"] != null)
+            {
+                Response.Cookies["PasswordCookie"].Expires = DateTime.Now.AddDays(-1);
+            }
+
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
         }

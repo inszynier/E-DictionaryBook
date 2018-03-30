@@ -9,9 +9,5 @@ namespace E_DictionaryBook.Models
     {
         public int Id { get; set; }
         public string RoleName { get; set; }
-
-        //public IEnumerable<string> RoleNames { get; set; }
-
-        
     }
 }
